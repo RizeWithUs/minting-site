@@ -72,8 +72,8 @@ const Accordion = () => {
     <>
       <div className="container-fluid mt-5 mb-5">
         <div className="row justify-content-center">
-          <div className="col-md-8 mt-2">
-            <div className="card">
+          <div className="col-md-6 mt-2">
+            <div className="card" style={{ border: "none" }}>
               <div className="card-body">
                 <h4 className="form-heading mb-4 text-primary text-center mt-3">
                   Frequently Asked Questions
