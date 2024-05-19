@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header>
+    <header style={{ position: "sticky", top: 0, zIndex: 999 }}>
       <nav
         class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-white-800"
         style={{ boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}
