@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Section = () => {
-  const teamMembers = [
+  const contents = [
     {
       title: "Promote",
       text: "By minting your NFT, you're not just creating digital art; you're promoting yourself, your brand or something you love. It's a holistic approach to art and marketing, all wrapped into one seamless experience.",
@@ -42,7 +42,7 @@ const Section = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {teamMembers.map((content, index) => (
+          {contents.map((content, index) => (
             <div
               key={index}
               className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
