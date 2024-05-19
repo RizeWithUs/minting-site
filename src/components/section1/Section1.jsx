@@ -48,10 +48,10 @@ const Team = () => {
     <section id="our-team" className="py-32">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-green-600">
-          Our Team
+          What NFT to Mint?
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {teamMembers.map((member, index) => (
             <div
               key={index}
