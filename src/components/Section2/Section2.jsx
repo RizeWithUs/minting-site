@@ -8,10 +8,10 @@ const Section = () => {
       image: "https://2knft.com/assets/promote.png",
     },
     {
-        title: "Promote",
-        text: "By minting your NFT, you're not just creating digital art; you're promoting yourself, your brand or something you love. It's a holistic approach to art and marketing, all wrapped into one seamless experience.",
-        image: "https://2knft.com/assets/promote.png",
-      },
+      title: "Promote",
+      text: "By minting your NFT, you're not just creating digital art; you're promoting yourself, your brand or something you love. It's a holistic approach to art and marketing, all wrapped into one seamless experience.",
+      image: "https://2knft.com/assets/promote.png",
+    },
   ];
 
   return (
@@ -26,9 +26,9 @@ const Section = () => {
             <div
               key={index}
               className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
-                index + 1   
+                index + 1
               }00`}
-              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#0080000a] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
+              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#00800006] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
             >
               <a href="#!">
                 <img

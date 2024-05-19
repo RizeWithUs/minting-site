@@ -48,7 +48,7 @@ const Section = () => {
               className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
                 index + 1
               }00`}
-              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#0080000a] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
+              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#00800006] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
             >
               <a href="#!">
                 <img
