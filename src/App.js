@@ -11,26 +11,18 @@ import Section2 from './components/Section2/Section2';
 import SectionBtn from './components/Button/SectionBtn';
 import Step from './components/Step/Step';
 
-import { SigningProvider } from './actions/authorizer';
 import { useEffect } from 'react';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 function App() {
-  // const { connectW } = SigningProvider();
 
-  // useEffect(() => {
-  //   async function connectWallet() {
-  //     await connectW();
-  //   }
-  //   connectWallet();
-
-  // }, [])
   return (
     <>
       <Header />
-      <Step />
+      {/* <Step /> */}
       <Section1 />
       <Section2 />
-      <SectionBtn title="Mint Now" onClick={() => console.log(";;; hi")} />
+      <SectionBtn title="Mint Now" />
       <Team />
       <Accordion />
       <Footer />

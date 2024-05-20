@@ -1,6 +1,75 @@
-import React from "react";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useAccount, useWalletClient } from "wagmi";
+import { ethers } from "ethers";
 
 const Header = () => {
+  const { open } = useWeb3Modal();
+
+  const [walletName, setWalletName] = useState("Connect Wallet");
+
+  function shortenAddress(address) {
+    if (address === "Connect Wallet") return "Connect Wallet";
+
+    if (typeof address !== "string" || address.length < 10) {
+      return address;
+    }
+    const firstFiveDigits = address.slice(0, 5);
+    const lastFourDigits = address.slice(-4);
+
+    return `${firstFiveDigits}...${lastFourDigits}`;
+  }
+
+  // /==========
+  const clientToProviderSigner = async (client) => {
+    const { account, chain, transport } = client;
+    const network = {
+      chainId: chain?.id,
+      name: chain?.name,
+      ensAddress: chain?.contracts?.ensRegistry?.address,
+    };
+    // You can use whatever provider that fits your need here.
+    const provider = new ethers.BrowserProvider(transport, network);
+    const signer = await provider.getSigner(account?.address);
+
+    return { provider, signer };
+  };
+
+  const {
+    address,
+    isConnected,
+    connector,
+    isConnecting,
+    isDisconnected,
+    isReconnecting,
+    status,
+  } = useAccount();
+
+  // ////==========
+
+  useEffect(() => {
+    setWalletName(
+      address
+        ? address
+        : // : userData.walletAddr
+          // ? shortenAddress(userData.walletAddr)
+          // : name
+          "Connect Wallet"
+    );
+  }, [address]);
+
+  const { data: walletClient } = useWalletClient();
+
+  const connectWallet = async () => {
+    if (!walletClient) return;
+    const { signer, provider } = await clientToProviderSigner(walletClient);
+  };
+
+  useEffect(() => {
+    isConnected && walletClient && connectWallet();
+  }, [isConnected, walletClient]);
+
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 999 }}>
       <nav
@@ -19,8 +88,9 @@ const Header = () => {
             <button
               className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
               style={{ backgroundColor: "green" }}
+              onClick={async () => await open()}
             >
-              Connect Wallet
+              {shortenAddress(walletName)}
             </button>
 
             <button

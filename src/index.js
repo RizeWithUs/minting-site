@@ -6,15 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 
 import { Web3ModalProvider } from "../src/Provider/WagmiProvider";
-import { SigningProvider } from "../src/actions/authorizer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <SigningProvider>
-      <Web3ModalProvider>
-        <App />
-      </Web3ModalProvider>
-    </SigningProvider>
+  <Web3ModalProvider>
+    <App />
+  </Web3ModalProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
