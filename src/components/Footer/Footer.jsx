@@ -115,7 +115,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div class="w-full bg-black/5 p-4 text-center">
+      <div class="w-full bg-[#0080001f] p-4 text-center">
         © 2024 Rizenfts -
         <a href="https://tw-elements.com/"> All right reserved</a>
       </div>

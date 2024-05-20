@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Section = () => {
   const contents = [
     {
-      title: "Promote",
-      text: "By minting your NFT, you're not just creating digital art; you're promoting yourself, your brand or something you love. It's a holistic approach to art and marketing, all wrapped into one seamless experience.",
-      image: "https://2knft.com/assets/promote.png",
+      title: "Personalized Creations",
+      text: "Your imagination is the only limit. At 2KNFT, we celebrate the diversity of creativity. Whether it's a piece of digital art, a memorable photo, or a design that holds special meaning, your NFT is a canvas for self-expression. Mint something that tells your story, showcases your passion, or stands for a cause you believe in. Remember, every NFT is a part of the grander mosaic, a collective artwork that echoes with individual voices.",
+      image: "https://2knft.com/assets/pixelated-dragon.png",
     },
     {
-      title: "Promote",
-      text: "By minting your NFT, you're not just creating digital art; you're promoting yourself, your brand or something you love. It's a holistic approach to art and marketing, all wrapped into one seamless experience.",
-      image: "https://2knft.com/assets/promote.png",
+      title: "Influencer Signature NFTs",
+      text: "If you're an influencer or creator, this is your stage. Mint your profile picture, your brand logo, or any image that resonates with your unique identity. Each NFT can include a link to your channel or website, driving engagement and connecting with fans in an entirely new dimension. Your NFT becomes more than an image; it's a gateway to your world, offering fans a digital piece of your journey. Be seen, be remembered, be influential.",
+      image: "https://2knft.com/assets/influencer-signature-nft.png",
+    },
+    {
+      title: "Boost Brand Awareness",
+      text: "Are you looking to boost your company or brand presence in the digital world? Whether you're in the crypto space or beyond, minting an NFT with your company's logo or brand symbol is a powerful move. This is not just a digital asset; it's a beacon of your identity. Seen by every visitor on 2knft.com, your corporate NFT can elevate brand recognition and create a lasting digital footprint. Imagine your logo, transformed into a unique, pixelated artwork, living eternally on the Ethereum blockchain. It's not just visibility; it's a statement.",
+      image: "https://2knft.com/assets/deer-logo-nft.png",
     },
   ];
 
@@ -22,29 +27,52 @@ const Section = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
-          {contents.map((content, index) => (
-            <div
-              key={index}
-              className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
-                index + 1
-              }00`}
-              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#00800006] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
-            >
-              <a href="#!">
-                <img
-                  class="rounded-t-lg"
-                  src={content.image}
-                  alt="Hollywood Sign on The Hill"
-                />
-              </a>
-              <div class="p-6">
-                <h5 class="mb-2 text-xl font-medium leading-tight">
-                  {content.title}
-                </h5>
-                <p class="mb-4 text-base">{content.text}</p>
-              </div>
-            </div>
-          ))}
+          {contents.map((content, index) => {
+            if (index === 0 || index === 2) {
+              return (
+                <div
+                  key={index}
+                  className={`bg-white rounded-lg p-1 my-1 text-center flex flex-row`}
+                >
+                  <a href="#!">
+                    <img
+                      className="rounded-t-lg w-100 -rotate-12"
+                      src={content.image}
+                      alt="Hollywood Sign on The Hill"
+                    />
+                  </a>
+                  <div className="p-6 flex flex-col text-left w-full">
+                    <h5 className="mb-2 text-xl font-medium leading-tight text-[green]">
+                      {content.title}
+                    </h5>
+                    <p className="mb-4 text-justify ">{content.text}</p>
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={index}
+                  className={`bg-white rounded-lg p-3 my-1 text-center flex flex-row`}
+                >
+                  <div className="p-6 flex flex-col text-right w-full">
+                    <h5 className="mb-2 text-xl font-medium leading-tight text-[green]">
+                      {content.title}
+                    </h5>
+                    <p className="mb-4 text-base">{content.text}</p>
+                  </div>
+
+                  <a href="#!">
+                    <img
+                      className="rounded-t-lg w-100 "
+                      src={content.image}
+                      alt="Hollywood Sign on The Hill"
+                    />
+                  </a>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </section>
