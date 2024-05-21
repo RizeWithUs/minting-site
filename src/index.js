@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 
 
 import { Web3ModalProvider } from "../src/Provider/WagmiProvider";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Web3ModalProvider>
     <App />
+    <ToastContainer />
   </Web3ModalProvider>
 );
 

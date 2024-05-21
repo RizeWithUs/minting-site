@@ -69,19 +69,25 @@ const Header = () => {
     setTimeout(() => setIsModalOpen(false), 300);
   };
 
+  const handleWalletClick = async (wallet) => {
+    if (wallet === "coreum") {
+      toast.error("Keplr wallet is not supported yet");
+    } else if (wallet === "ethereum") {
+      await open();
+    }
+  };
+
   const renderHTML = () => {
     const wallets = [
       {
-        name: "MetaMask",
+        name: "Ethereum",
         logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsvBB18px3CW4CHmO9jF9L_3zKm20A4D7biaXeziIaRA&s",
+        id: "ethereum",
       },
       {
-        name: "Keplr ",
+        name: "Coreum",
         logo: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/5e/4f/57/5e4f5704-c8f3-83cb-884d-434037edbe3a/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/1200x600wa.png",
-      },
-      {
-        name: "More wallets",
-        logo: "https://s3-alpha.figma.com/hub/file/2248230955/068e8e6e-cf7a-4da9-99d7-04fdaa4dedbc-cover.png",
+        id: "coreum",
       },
     ];
 
@@ -93,6 +99,9 @@ const Header = () => {
             <li
               key={wallet.name}
               className="flex items-center space-x-4 cursor-pointer"
+              onClick={(e) => {
+                handleWalletClick(wallet.id);
+              }}
             >
               <img
                 src={wallet.logo}
@@ -126,7 +135,6 @@ const Header = () => {
               <button
                 className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 style={{ backgroundColor: "green" }}
-                // onClick={async () => await open()}
                 onClick={handleOpenModal}
               >
                 {shortenAddress(walletName)}
