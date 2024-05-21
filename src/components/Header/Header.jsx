@@ -3,6 +3,7 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount, useWalletClient } from "wagmi";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
+import ModalContainer from "../Modal/Modal";
 
 const Header = () => {
   const { open } = useWeb3Modal();
@@ -68,6 +69,44 @@ const Header = () => {
     setTimeout(() => setIsModalOpen(false), 300);
   };
 
+  const renderHTML = () => {
+    const wallets = [
+      {
+        name: "MetaMask",
+        logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsvBB18px3CW4CHmO9jF9L_3zKm20A4D7biaXeziIaRA&s",
+      },
+      {
+        name: "Keplr ",
+        logo: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/5e/4f/57/5e4f5704-c8f3-83cb-884d-434037edbe3a/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/1200x600wa.png",
+      },
+      {
+        name: "More wallets",
+        logo: "https://s3-alpha.figma.com/hub/file/2248230955/068e8e6e-cf7a-4da9-99d7-04fdaa4dedbc-cover.png",
+      },
+    ];
+
+    return (
+      <div className="flex flex-col items-center">
+        <h2 className="text-xl font-bold mb-4">Connect Your Wallet</h2>
+        <ul className="flex flex-col space-y-4">
+          {wallets.map((wallet) => (
+            <li
+              key={wallet.name}
+              className="flex items-center space-x-4 cursor-pointer"
+            >
+              <img
+                src={wallet.logo}
+                alt={`${wallet.name} logo`}
+                className="w-10 h-10"
+              />
+              <span className="text-lg font-medium">{wallet.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <>
       <header style={{ position: "sticky", top: 0, zIndex: 999 }}>
@@ -92,7 +131,7 @@ const Header = () => {
               >
                 {shortenAddress(walletName)}
               </button>
-             
+
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
@@ -136,27 +175,11 @@ const Header = () => {
       </header>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black opacity-50"></div>
-          <div
-            className={`bg-white w-1/3 p-8 z-10 rounded-lg shadow-lg relative transform transition-all duration-300 ease-in-out ${
-              isAnimating
-                ? "translate-y-0 opacity-100 scale-100"
-                : "translate-y-full opacity-0 scale-75"
-            }`}
-          >
-            <button
-              className="absolute top-4 right-4 text-gray-600"
-              onClick={handleCloseModal}
-            >
-              &#10006;
-            </button>
-            <div>
-              <li>first</li>
-              <li>second</li>
-            </div>
-          </div>
-        </div>
+        <ModalContainer
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          render={renderHTML}
+        />
       )}
     </>
   );
