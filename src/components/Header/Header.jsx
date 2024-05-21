@@ -153,7 +153,7 @@ const Header = () => {
               className="absolute top-4 right-4 text-gray-600"
               onClick={handleCloseModal}
             >
-              X
+              &#10006;
             </button>
           </div>
         </div>
