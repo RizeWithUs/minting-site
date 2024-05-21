@@ -143,41 +143,18 @@ const Header = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="fixed inset-0 bg-black opacity-50"></div>
           <div
-            className={`bg-white w-1/3 p-8 z-10 rounded-lg shadow-lg relative transform transition-transform duration-300 ease-in-out ${
+            className={`bg-white w-1/3 p-8 z-10 rounded-lg shadow-lg relative transform transition-all duration-300 ease-in-out ${
               isAnimating
-                ? "translate-y-0 opacity-100"
-                : "translate-y-full opacity-0"
+                ? "translate-y-0 opacity-100 scale-100"
+                : "translate-y-full opacity-0 scale-75"
             }`}
           >
             <button
               className="absolute top-4 right-4 text-gray-600"
               onClick={handleCloseModal}
             >
-              Close Form
+              X
             </button>
-            <h2 className="text-2xl font-bold mb-4">Form Title</h2>
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700">Field 1</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Field 2</label>
-                <input
-                  type="text"
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                Submit
-              </button>
-            </form>
           </div>
         </div>
       )}
