@@ -60,12 +60,12 @@ const Header = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-    setTimeout(() => setIsAnimating(true), 10); // start animation
+    setTimeout(() => setIsAnimating(true), 10);
   };
 
   const handleCloseModal = () => {
     setIsAnimating(false);
-    setTimeout(() => setIsModalOpen(false), 300); // match the duration of the animation
+    setTimeout(() => setIsModalOpen(false), 300);
   };
 
   return (
@@ -87,16 +87,12 @@ const Header = () => {
               <button
                 className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                 style={{ backgroundColor: "green" }}
-                onClick={async () => await open()}
+                // onClick={async () => await open()}
+                onClick={handleOpenModal}
               >
                 {shortenAddress(walletName)}
               </button>
-              <button
-                className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-                onClick={handleOpenModal}
-              >
-                Open Form
-              </button>
+             
               <button
                 data-collapse-toggle="mobile-menu-2"
                 type="button"
@@ -155,6 +151,10 @@ const Header = () => {
             >
               &#10006;
             </button>
+            <div>
+              <li>first</li>
+              <li>second</li>
+            </div>
           </div>
         </div>
       )}
