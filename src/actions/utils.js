@@ -1,6 +1,7 @@
 class Utils {
-    async saveWallet(wallet) {
-        localStorage.setItem("wallet", wallet);
+    async saveChain(chain) {
+        if (chain !== "coreum" && chain !== "ethereum") return;
+        localStorage.setItem("wallet", chain);
     }
 }
 

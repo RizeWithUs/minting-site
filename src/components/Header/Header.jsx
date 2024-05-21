@@ -4,12 +4,15 @@ import { useAccount, useWalletClient } from "wagmi";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import ModalContainer from "../Modal/Modal";
+import Utils from "../../actions/utils";
 
 const Header = () => {
   const { open } = useWeb3Modal();
   const [walletName, setWalletName] = useState("Connect Wallet");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const utils = new Utils();
 
   const clientToProviderSigner = async (client) => {
     const { account, chain, transport } = client;
@@ -75,6 +78,7 @@ const Header = () => {
     } else if (wallet === "ethereum") {
       await open();
     }
+    utils.saveChain(wallet);
   };
 
   const renderHTML = () => {
