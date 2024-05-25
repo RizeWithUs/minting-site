@@ -4,7 +4,6 @@ import NftDetailsModal from "../Modal/NftDetails";
 const MinterCanvas = () => {
   const [percentage, setPercentage] = useState(100);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [addingDetails, setAddingDetails] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -40,7 +39,7 @@ const MinterCanvas = () => {
     if (uploadedImage) {
       // Add minting logic here
       setIsModalOpen(true);
-      setPercentage(70);
+      setPercentage(80);
       console.log("Minting NFT with image:", uploadedImage);
     }
   };

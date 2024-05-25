@@ -20,17 +20,12 @@ import TutSec from "./components/TutSec/TutSec"
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
+  const scrollToMint = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 
   return (
     <>
@@ -38,11 +33,9 @@ function App() {
       <MinterCanvas />
       <StepSec />
       <TutSec />
-      {/* <Step /> */}
-      <MintNowModal onClick={handleClose} isOpen={isOpen} />
-      {/* <Section1 /> */}
+      {/* <MintNowModal onClick={handleClose} isOpen={isOpen} /> */}
       <Section2 />
-      {/* <SectionBtn title="Mint Now" onClick={handleOpen} /> */}
+      <SectionBtn title="Mint Now" onClick={scrollToMint} />
       <Team />
       <Accordion />
       <Footer />
