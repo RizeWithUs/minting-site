@@ -12,21 +12,19 @@ const MinterCanvas = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setUploadedImage(reader.result);
+        setPercentage(30);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleUploadClick = () => {
-    document.getElementById("fileInput").click();
+  const handleClearMint = () => {
+    setUploadedImage(null);
+    setPercentage(0);
   };
 
-  const handleMintClick = () => {
-    if (uploadedImage) {
-      // Add minting logic here
-      setIsModalOpen(true);
-      console.log("Minting NFT with image:", uploadedImage);
-    }
+  const handleUploadClick = () => {
+    document.getElementById("fileInput").click();
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +34,15 @@ const MinterCanvas = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+  };
+
+  const handleMintClick = () => {
+    if (uploadedImage) {
+      // Add minting logic here
+      setIsModalOpen(true);
+      setPercentage(70);
+      console.log("Minting NFT with image:", uploadedImage);
+    }
   };
 
   const handleCloseModal = () => {
@@ -50,17 +57,14 @@ const MinterCanvas = () => {
 
   return (
     <>
-      {addingDetails && (
-        <NftDetailsModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          initialName={nftName}
-          initialLink={nftLink}
-          initialDescription={nftDescription}
-          onUpdate={handleUpdateNftDetails}
-        />
-      )}
-
+      <NftDetailsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        initialName={nftName}
+        initialLink={nftLink}
+        initialDescription={nftDescription}
+        onUpdate={handleUpdateNftDetails}
+      />
       <div className="w-full text-[green] pt-2 mt-5 font-bold text-center animate-bounce z-50 md:text-2xl">
         <p>Click in the white canvas below to MINT 👇</p>
       </div>
@@ -196,7 +200,7 @@ const MinterCanvas = () => {
                       height="1em"
                       width="1em"
                       xmlns="http://www.w3.org/2000/svg"
-                      // onClick={handleUploadClick}
+                      onClick={handleClearMint}
                     >
                       <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 10.5858L14.8284 7.75736L16.2426 9.17157L13.4142 12L16.2426 14.8284L14.8284 16.2426L12 13.4142L9.17157 16.2426L7.75736 14.8284L10.5858 12L7.75736 9.17157L9.17157 7.75736L12 10.5858Z"></path>
                     </svg>
