@@ -38,35 +38,35 @@ const Section = () => {
     <section id="our-team" className="py-32">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 text-green-600">
-          Why Mint with 2KNFT?
+          Why Mint with rizenfts?
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {contents.map((content, index) => (
             <div
               key={index}
-              className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
-                index + 1
-              }00`}
-              class="mx-3 mt-6 flex flex-col rounded-lg bg-[#00800006] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
+              // className={`bg-white rounded-lg shadow-md p-3 my-1 text-center border border-red-${
+              //   index + 1
+              // }00`}
+              className="mx-3 mt-6 flex flex-col rounded-lg bg-[#00800006] text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-[black] sm:shrink-0 sm:grow sm:basis-0"
             >
               <a href="#!">
                 <img
-                  class="rounded-t-lg"
+                  className="rounded-t-lg"
                   src={content.image}
                   alt="Hollywood Sign on The Hill"
                 />
               </a>
-              <div class="p-6">
-                <h5 class="mb-2 text-xl font-medium leading-tight">
+              <div className="p-6">
+                <h5 className="mb-2 text-xl font-medium leading-tight">
                   {content.title}
                 </h5>
-                <p class="mb-4 text-base">{content.text}</p>
+                <p className="mb-4 text-base">{content.text}</p>
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </div> 
     </section>
   );
 };

@@ -8,13 +8,16 @@ import reportWebVitals from './reportWebVitals';
 import { Web3ModalProvider } from "../src/Provider/WagmiProvider";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { WalletProvider } from './actions/cosmwasm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Web3ModalProvider>
-    <App />
-    <ToastContainer />
-  </Web3ModalProvider>
+  <WalletProvider>
+    <Web3ModalProvider>
+      <App />
+      <ToastContainer />
+    </Web3ModalProvider>
+  </WalletProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

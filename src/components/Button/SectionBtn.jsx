@@ -1,6 +1,8 @@
 import React from "react";
 
 const SectionBtn = ({ title = "button", onClick = null }) => {
+
+
   return (
     <div className="w-full flex justify-center" style={{ marginTop: -150 }}>
       <button

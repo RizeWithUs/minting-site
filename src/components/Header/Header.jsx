@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { useAccount, useWalletClient } from "wagmi";
+import { useAccount, useWalletClient, useDisconnect } from "wagmi";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import ModalContainer from "../Modal/Modal";
 import Utils from "../../actions/utils";
+import { useWallet } from "../../actions/cosmwasm";
 
 const Header = () => {
   const { open } = useWeb3Modal();
   const [walletName, setWalletName] = useState("Connect Wallet");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const { connectToCoreum } = useWallet();
+
+  // const {connectToCoreum} =
 
   const utils = new Utils();
 
@@ -37,8 +42,13 @@ const Header = () => {
     status,
   } = useAccount();
 
+  const { disconnect } = useDisconnect();
+
   useEffect(() => {
     setWalletName(address ? address : "Connect Wallet");
+
+    if (address) localStorage.setItem("address", address);
+    if (isConnected) localStorage.setItem("wallet_type", "ethereum");
   }, [address]);
 
   const { data: walletClient } = useWalletClient();
@@ -73,12 +83,24 @@ const Header = () => {
   };
 
   const handleWalletClick = async (wallet) => {
-    if (wallet === "coreum") {
-      toast.error("Keplr wallet is not supported yet");
+    if (wallet !== "ethereum") {
+      await disconnect();
+      utils.clearChain();
+    }
+
+    if (wallet === "keplr") {
+      authenticate("keplr");
+    } else if (wallet === "leap") {
+      authenticate("leap");
     } else if (wallet === "ethereum") {
       await open();
     }
     utils.saveChain(wallet);
+    setIsModalOpen(false);
+  };
+
+  const authenticate = async (wallet_type) => {
+    await connectToCoreum(wallet_type);
   };
 
   const renderHTML = () => {
@@ -89,30 +111,27 @@ const Header = () => {
         id: "ethereum",
       },
       {
-        name: "Coreum",
+        name: "Keplr",
         logo: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/5e/4f/57/5e4f5704-c8f3-83cb-884d-434037edbe3a/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/1200x600wa.png",
-        id: "coreum",
+        id: "keplr",
       },
     ];
 
     return (
       <div className="flex flex-col items-center">
         <h2 className="text-xl font-bold mb-4">Connect Your Wallet</h2>
-        <ul className="flex flex-col space-y-4">
+        <ul className="flex space-x-4">
           {wallets.map((wallet) => (
             <li
               key={wallet.name}
-              className="flex items-center space-x-4 cursor-pointer"
-              onClick={(e) => {
-                handleWalletClick(wallet.id);
-              }}
+              className="flex items-center cursor-pointer"
+              onClick={() => handleWalletClick(wallet.id)}
             >
               <img
                 src={wallet.logo}
                 alt={`${wallet.name} logo`}
-                className="w-10 h-10"
+                className="w-20 h-20 border-4 border-green-500 rounded"
               />
-              <span className="text-lg font-medium">{wallet.name}</span>
             </li>
           ))}
         </ul>

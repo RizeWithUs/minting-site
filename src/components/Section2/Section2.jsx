@@ -36,9 +36,16 @@ const Section = () => {
                 >
                   <a href="#!">
                     <img
-                      className="rounded-t-lg w-100 -rotate-12"
+                      alt="Pixelated red dragon flying NFT"
+                      loading="lazy"
+                      width="250"
+                      height="250"
+                      decoding="async"
+                      data-nimg="1"
+                      className="border-4 border-primary md:rotate-[-5deg] shadow-xl"
+                      style={{ color: "transparent" }}
                       src={content.image}
-                      alt="Hollywood Sign on The Hill"
+                      // alt="Hollywood Sign on The Hill"
                     />
                   </a>
                   <div className="p-6 flex flex-col text-left w-full">
@@ -64,9 +71,15 @@ const Section = () => {
 
                   <a href="#!">
                     <img
-                      className="rounded-t-lg w-100 "
+                      alt="Influencer pixelated profile NFT"
+                      loading="lazy"
+                      width="250"
+                      height="250"
+                      decoding="async"
+                      data-nimg="1"
+                      className="border-4 border-primary md:rotate-[5deg] shadow-xl"
+                      style={{ color: "transparent" }}
                       src={content.image}
-                      alt="Hollywood Sign on The Hill"
                     />
                   </a>
                 </div>
