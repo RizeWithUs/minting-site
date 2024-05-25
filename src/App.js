@@ -38,7 +38,7 @@ function App() {
       <SectionBtn title="Mint Now" onClick={scrollToMint} />
       <Team />
       <Accordion />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

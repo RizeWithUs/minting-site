@@ -27,67 +27,49 @@ const Section = () => {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
-          {contents.map((content, index) => {
-            if (index === 0 || index === 2) {
-              return (
-                <div
-                  key={index}
-                  className={`bg-white rounded-lg p-1 my-1 text-center flex flex-row`}
-                >
-                  <a href="#!">
-                    <img
-                      alt="Pixelated red dragon flying NFT"
-                      loading="lazy"
-                      width="250"
-                      height="250"
-                      decoding="async"
-                      data-nimg="1"
-                      className="border-4 border-primary md:rotate-[-5deg] shadow-xl"
-                      style={{ color: "transparent" }}
-                      src={content.image}
-                      // alt="Hollywood Sign on The Hill"
-                    />
-                  </a>
-                  <div className="p-6 flex flex-col text-left w-full">
-                    <h5 className="mb-2 text-xl font-medium leading-tight text-[green]">
-                      {content.title}
-                    </h5>
-                    <p className="mb-4 text-justify ">{content.text}</p>
-                  </div>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={index}
-                  className={`bg-white rounded-lg p-3 my-1 text-center flex flex-row`}
-                >
-                  <div className="p-6 flex flex-col text-right w-full">
-                    <h5 className="mb-2 text-xl font-medium leading-tight text-[green]">
-                      {content.title}
-                    </h5>
-                    <p className="mb-4 text-base">{content.text}</p>
-                  </div>
-
-                  <a href="#!">
-                    <img
-                      alt="Influencer pixelated profile NFT"
-                      loading="lazy"
-                      width="250"
-                      height="250"
-                      decoding="async"
-                      data-nimg="1"
-                      className="border-4 border-primary md:rotate-[5deg] shadow-xl"
-                      style={{ color: "transparent" }}
-                      src={content.image}
-                    />
-                  </a>
-                </div>
-              );
-            }
-          })}
+          {contents.map((content, index) => (
+            <div
+              key={index}
+              className={`bg-white rounded-lg p-1 my-1 text-center flex flex-col sm:flex-row ${
+                index % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
+              }`}
+            >
+              <a href="#!">
+                <img
+                  alt="NFT"
+                  loading="lazy"
+                  width="250"
+                  height="250"
+                  decoding="async"
+                  data-nimg="1"
+                  className="border-4 border-primary md:rotate-[5deg] shadow-xl"
+                  style={{ color: "transparent" }}
+                  src={content.image}
+                />
+              </a>
+              <div className="p-6 flex flex-col text-left w-full">
+                <h5 className="mb-2 text-xl font-medium leading-tight text-[green]">
+                  {content.title}
+                </h5>
+                <p className="mb-4 text-justify">{content.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .sm\\:flex-row {
+            flex-direction: column !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .lg\\:flex-row-reverse {
+            flex-direction: row-reverse !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
