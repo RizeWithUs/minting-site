@@ -1,6 +1,6 @@
 import React from "react";
 
-const TutSec = () => {
+const TutSec = ({ onClick }) => {
   return (
     <div className="text-gray-800 flex flex-col gap-6 sm:gap-12 py-10 sm:py-14 items-center">
       <h2 className="font-bold text-center text-2xl md:text-3xl">
@@ -53,7 +53,10 @@ const TutSec = () => {
             allow="fullscreen"
           ></iframe>
           <div className="flex justify-center">
-            <div className="bg-primary text-white text-xl font-semibold p-3 cursor-pointer hover:scale-105">
+            <div
+              className="bg-primary text-white text-xl font-semibold p-3 cursor-pointer hover:scale-105"
+              onClick={onClick}
+            >
               Mint Now
             </div>
           </div>

@@ -33,7 +33,7 @@ function App() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [signer, setSigner] = useState(null);
 
-  const { connectToCoreum } = useWallet();
+  const { connectToCoreum, disconnectFromCoreum } = useWallet();
 
   const utils = new Utils();
 
@@ -119,7 +119,12 @@ function App() {
   };
 
   const authenticate = async (wallet_type) => {
-    const { signingClient, walletAddress } = await connectToCoreum(wallet_type);
+
+    const result = await connectToCoreum(wallet_type);
+
+    const { tempClient: signingClient, address: walletAddress } = result;
+
+
     if (signingClient) {
       setWalletName(walletAddress);
       setSigner(signingClient)
@@ -170,6 +175,37 @@ function App() {
     });
   }
 
+
+  const initConnect = async (wallet) => {
+    if (wallet !== "ethereum") {
+      await disconnect();
+      utils.clearChain();
+    }
+
+    if (wallet === "keplr") {
+      authenticate("keplr");
+    } else if (wallet === "leap") {
+      authenticate("leap");
+    } else if (wallet === "ethereum") {
+      await open();
+    }
+  }
+  const [windowAvailable, setWindowAvailable] = useState(false);
+
+  useEffect(() => {
+    console.log("checking window availability")
+    if (typeof window !== 'undefined') {
+      setWindowAvailable(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (windowAvailable) {
+      const wallet = localStorage.getItem("wallet_type");
+      initConnect(wallet);
+    }
+  }, [windowAvailable]);
+
   return (
     <>
       <Header
@@ -184,11 +220,11 @@ function App() {
         signer={signer}
       />
       <MinterCanvas
-       walletName={walletName}
-       signer={signer}
+        walletName={walletName}
+        signer={signer}
       />
       <StepSec />
-      <TutSec />
+      <TutSec onClick={scrollToMint} />
       <Section2 />
       <SectionBtn title="Mint Now" onClick={scrollToMint} />
       <Team />

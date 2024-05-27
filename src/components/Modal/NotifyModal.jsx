@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./loader.css"
 
 const NotifyModal = ({
   isOpen,
@@ -42,6 +43,9 @@ const NotifyModal = ({
                 <div className="text-black">Progress</div>
               </h1>
               <p className="flex gap-1  justify-center">{notifyMsg}</p>
+              <div class="loading-icon">
+                <div class="icon"></div>
+              </div>
 
               {hasBtn && (
                 <div className="flex justify-center">

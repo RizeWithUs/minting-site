@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const NftDetailsModal = ({
   isOpen,
@@ -22,8 +23,25 @@ const NftDetailsModal = ({
     setNftDescription(initialDescription || "");
   }, [isOpen, initialName, initialLink, initialDescription]);
 
+  function isUrlValid(userInput) {
+    var regexQuery =
+      /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
+    var url = new RegExp(regexQuery, "g");
+    if (url.test(userInput)) {
+      return true;
+    }
+    return false;
+  }
+
   const handleMint = (event) => {
     event.preventDefault();
+
+    // validate details
+    if (isUrlValid(nftLink) === false) {
+      toast.error("Please enter a valid URL");
+      return;
+    }
+
     console.log("Minting NFT:", {
       name: nftName,
       link: nftLink,

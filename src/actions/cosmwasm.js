@@ -88,6 +88,7 @@ export const WalletProvider = ({ children }) => {
             return;
         }
 
+
         try {
             const offlineSigner = await provider.getOfflineSigner(walletConfig.chainId);
             const tempClient = await SigningCosmWasmClient.connectWithSigner(walletConfig.rpc, offlineSigner);
@@ -95,20 +96,36 @@ export const WalletProvider = ({ children }) => {
 
             const accounts = await offlineSigner.getAccounts();
             const address = accounts[0].address;
+
             setWalletAddress(address);
             localStorage.setItem("address", address);
             localStorage.setItem("wallet_type", wallet_type);
-            return { signingClient, walletAddress }
+            console.log(":::::;111", { tempClient, address })
+            return { tempClient, address }
         } catch (err) {
             console.log("Connect Wallet: ", err);
+            return { tempClient: null, address: "" }
         }
+    };
+
+    const disconnectFromCoreum = () => {
+        if (signingClient) {
+            localStorage.removeItem("address");
+            localStorage.removeItem("wallet_type");
+            localStorage.removeItem("walletconnect");
+            signingClient.disconnect();
+        }
+        setWalletAddress("");
+        setSigningClient(null);
+        return { signingClient, walletAddress }
     };
 
     return (
         <WalletContext.Provider value={{
             walletAddress,
             signingClient,
-            connectToCoreum
+            connectToCoreum,
+            disconnectFromCoreum,
         }}>
             {children}
         </WalletContext.Provider>

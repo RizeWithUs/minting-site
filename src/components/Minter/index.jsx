@@ -8,7 +8,9 @@ const MinterCanvas = ({ walletName, signer }) => {
   const [uploadedImage, setUploadedImage] = useState(null);
 
   useEffect(() => {
-    toast.success(walletName + " Connected to Coreum Network");
+    if (walletName && walletName?.toLowerCase().trim() !== "connect wallet") {
+      toast.success(`Connected to ${walletName}`);
+    }
   }, [walletName]);
 
   const handleFileChange = (event) => {
@@ -66,9 +68,11 @@ const MinterCanvas = ({ walletName, signer }) => {
 
   const handleMint = async () => {
     // handle all web3 implementations here
-    alert("moving... >>>");
+    if (!signer) {
+      return toast.error("Please connect your wallet first");
+    }
     setIsNotifyOpen(true);
-  }
+  };
 
   const handleUpdateNftDetails = ({ name, link, description }) => {
     setNftName(name);
@@ -95,8 +99,8 @@ const MinterCanvas = ({ walletName, signer }) => {
         isOpen={isNotifyOpen}
         onClose={handleCloseNotify}
         notifyMsg={notifyMsg}
-        btnFunc={btnFunc}
-        hasBtn={true}
+        // btnFunc={btnFunc}
+        // hasBtn={true}
       />
 
       <div className="w-full text-[green] pt-2 mt-5 font-bold text-center animate-bounce z-50 md:text-2xl">
