@@ -21,16 +21,16 @@ export const config = {
     ipfsGateway: "https://nftstorage.b-cdn.net/ipfs/",
 
 
-    // socketUrl: useTestBackend ? "https://stakecoreum.com" : "https://stakecoreum.com",
-    socketUrl: useTestBackend ? "http://localhost:1234" : "http://localhost:1234",
+    socketUrl: useTestBackend ? "https://coreum-backend.onrender.com" : "https://coreum-backend.onrender.com",
+    // socketUrl: useTestBackend ? "http://localhost:1234" : "http://localhost:1234",
 
 
-    // baseUrl: useTestBackend
-    //   ? "https://stakecoreum.com/api/"
-    //   : "https://stakecoreum.com/api/",
     baseUrl: useTestBackend
-        ? "http://localhost:1234/api/"
-        : "http://localhost:1234/api/",
+        ? "https://coreum-backend.onrender.com/api/"
+        : "https://coreum-backend.onrender.com/api/",
+    // baseUrl: useTestBackend
+    //     ? "http://localhost:1234/api/"
+    //     : "http://localhost:1234/api/",
 
 
     // API_URL: useTestBackend ? "https://stakecoreum.com/" : "https://stakecoreum.com/",

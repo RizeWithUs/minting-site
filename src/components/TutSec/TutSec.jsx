@@ -4,7 +4,7 @@ const TutSec = ({ onClick }) => {
   return (
     <div className="text-gray-800 flex flex-col gap-6 sm:gap-12 py-10 sm:py-14 items-center">
       <h2 className="font-bold text-center text-2xl md:text-3xl">
-        What is <span className="text-2k">2K</span>NFT?
+        What is <span className="text-[green]">2K</span>NFT?
       </h2>
       <div className="flex flex-col xl:flex-row gap-10 sm:gap-14 px-8 sm:px-[15%] lg:px-[8%] items-center w-full justify-center">
         <div className="flex flex-col gap-4 text-justify lg:max-w-2xl">

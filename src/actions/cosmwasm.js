@@ -17,6 +17,7 @@ export const WalletProvider = ({ children }) => {
     const [signingClient, setSigningClient] = useState(null);
 
     const isEmpty = (value) => {
+        console.log(":::::: isEmpty",value)
         return (
             value === undefined ||
             value === null ||
@@ -126,6 +127,7 @@ export const WalletProvider = ({ children }) => {
             signingClient,
             connectToCoreum,
             disconnectFromCoreum,
+            isEmpty,
         }}>
             {children}
         </WalletContext.Provider>

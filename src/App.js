@@ -24,6 +24,11 @@ import { toast } from "react-toastify";
 import ModalContainer from "./components/Modal/Modal";
 import Utils from "../src/actions/utils";
 import { useWallet } from "../src/actions/cosmwasm";
+import { config } from './actions/config';
+
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
+import md5 from 'md5';
 
 function App() {
 
@@ -32,8 +37,9 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [signer, setSigner] = useState(null);
+  const [author, setAuthor] = useState(null);
 
-  const { connectToCoreum, disconnectFromCoreum } = useWallet();
+  const { connectToCoreum, disconnectFromCoreum, isEmpty } = useWallet();
 
   const utils = new Utils();
 
@@ -76,6 +82,41 @@ function App() {
     if (!walletClient) return;
     const { signer, provider } = await clientToProviderSigner(walletClient);
   };
+
+
+
+  const Login = (params) => {
+
+    axios({
+      method: "post",
+      url: `${config.baseUrl}users/login`,
+      data: params,
+    })
+      .then(function (response) {
+        if (response.data.code === 0) {
+          //set the token to sessionStroage
+          const token = response.data.token;
+          localStorage.setItem("jwtToken", response.data.token);
+          const decoded = jwt_decode(token);
+          setAuthor((decoded)._doc);
+        } else {
+          setWalletName("Connect Wallet")
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    if (!isEmpty(walletName)) {
+      const params = { address: "", password: "" };
+      params.address = walletName;
+      params.password = md5(walletName);
+      Login(params);
+    } else {
+    }
+  }, [walletName]);
 
   useEffect(() => {
     isConnected && walletClient && connectWallet();
