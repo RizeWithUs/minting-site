@@ -98,6 +98,7 @@ export const WalletProvider = ({ children }) => {
             setWalletAddress(address);
             localStorage.setItem("address", address);
             localStorage.setItem("wallet_type", wallet_type);
+            return { signingClient, walletAddress }
         } catch (err) {
             console.log("Connect Wallet: ", err);
         }

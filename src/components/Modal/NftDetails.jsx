@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 
-const NftDetailsModal = ({ isOpen, onClose, initialName, initialLink, initialDescription, onUpdate }) => {
+const NftDetailsModal = ({
+  isOpen,
+  onClose,
+  initialName,
+  initialLink,
+  initialDescription,
+  onUpdate,
+  onMint,
+}) => {
   const [nftName, setNftName] = useState(initialName || "");
   const [nftLink, setNftLink] = useState(initialLink || "");
-  const [nftDescription, setNftDescription] = useState(initialDescription || "");
+  const [nftDescription, setNftDescription] = useState(
+    initialDescription || ""
+  );
 
   useEffect(() => {
     // Set the initial values when the modal opens
@@ -14,16 +24,14 @@ const NftDetailsModal = ({ isOpen, onClose, initialName, initialLink, initialDes
 
   const handleMint = (event) => {
     event.preventDefault();
-    // Add minting logic here
     console.log("Minting NFT:", {
       name: nftName,
       link: nftLink,
       description: nftDescription,
     });
-    // Call the onUpdate function with the updated values
     onUpdate({ name: nftName, link: nftLink, description: nftDescription });
-    // Close the modal
     onClose();
+    onMint();
   };
 
   return (

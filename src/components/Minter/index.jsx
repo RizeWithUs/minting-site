@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NftDetailsModal from "../Modal/NftDetails";
+import NotifyModal from "../Modal/NotifyModal";
+import { toast } from "react-toastify";
 
-const MinterCanvas = () => {
-  const [percentage, setPercentage] = useState(100);
+const MinterCanvas = ({ walletName, signer }) => {
+  const [percentage, setPercentage] = useState(0.0);
   const [uploadedImage, setUploadedImage] = useState(null);
+
+  useEffect(() => {
+    toast.success(walletName + " Connected to Coreum Network");
+  }, [walletName]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -30,6 +36,8 @@ const MinterCanvas = () => {
   const [nftName, setNftName] = useState("");
   const [nftLink, setNftLink] = useState("");
   const [nftDescription, setNftDescription] = useState("");
+  const [isNotifyOpen, setIsNotifyOpen] = useState(false);
+  const [notifyMsg, setNotifyMsg] = useState("Your upload loading...");
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -44,9 +52,23 @@ const MinterCanvas = () => {
     }
   };
 
+  const handleOpenNotify = () => {
+    setIsNotifyOpen(true);
+  };
+
+  const handleCloseNotify = () => {
+    setIsNotifyOpen(false);
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleMint = async () => {
+    // handle all web3 implementations here
+    alert("moving... >>>");
+    setIsNotifyOpen(true);
+  }
 
   const handleUpdateNftDetails = ({ name, link, description }) => {
     setNftName(name);
@@ -54,16 +76,29 @@ const MinterCanvas = () => {
     setNftDescription(description);
   };
 
+  const btnFunc = () => {
+    console.log("lsdjflsdfjldfjd");
+  };
+
   return (
     <>
       <NftDetailsModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
+        onMint={handleMint}
         initialName={nftName}
         initialLink={nftLink}
         initialDescription={nftDescription}
         onUpdate={handleUpdateNftDetails}
       />
+      <NotifyModal
+        isOpen={isNotifyOpen}
+        onClose={handleCloseNotify}
+        notifyMsg={notifyMsg}
+        btnFunc={btnFunc}
+        hasBtn={true}
+      />
+
       <div className="w-full text-[green] pt-2 mt-5 font-bold text-center animate-bounce z-50 md:text-2xl">
         <p>Click in the white canvas below to MINT 👇</p>
       </div>
