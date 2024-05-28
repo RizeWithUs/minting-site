@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const nodeExternals = require("webpack-node-externals");
 module.exports = function override(config, env) {
   config.resolve.fallback = {
     vm: require.resolve("vm-browserify"),
