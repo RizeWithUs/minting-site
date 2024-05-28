@@ -29,6 +29,7 @@ import { config } from './actions/config';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import md5 from 'md5';
+import { getCollectionList } from './api/collections';
 
 function App() {
 
@@ -37,9 +38,11 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [signer, setSigner] = useState(null);
-  const [author, setAuthor] = useState(null);
+  const [currentUsr, setCurrentUsr] = useState(null);
+  const [collectionList, setCollectionList] = useState([]);
 
-  const { connectToCoreum, disconnectFromCoreum, isEmpty } = useWallet();
+  const { connectToCoreum, disconnectFromCoreum, isEmpty, loadClient, client } = useWallet();
+  const [currentNetworkSymbol, setCurrentNetworkSymbol] = useState(1);
 
   const utils = new Utils();
 
@@ -83,6 +86,18 @@ function App() {
     const { signer, provider } = await clientToProviderSigner(walletClient);
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!client) {
+          await loadClient();
+        }
+      } catch (err) {
+        setTimeout(() => loadClient(), 1000);
+      }
+    })();
+  }, [client, loadClient]);
+
 
 
   const Login = (params) => {
@@ -98,13 +113,14 @@ function App() {
           const token = response.data.token;
           localStorage.setItem("jwtToken", response.data.token);
           const decoded = jwt_decode(token);
-          setAuthor((decoded)._doc);
+          setCurrentUsr((decoded)._doc);
         } else {
           setWalletName("Connect Wallet")
         }
       })
       .catch(function (error) {
         console.log(error);
+        setWalletName("Connect Wallet")
       });
   };
 
@@ -150,10 +166,13 @@ function App() {
 
     if (wallet === "keplr") {
       authenticate("keplr");
+      setCurrentNetworkSymbol(1)
     } else if (wallet === "leap") {
       authenticate("leap");
+      setCurrentNetworkSymbol(1)
     } else if (wallet === "ethereum") {
       await open();
+      setCurrentNetworkSymbol(2)
     }
     utils.saveChain(wallet);
     setIsModalOpen(false);
@@ -169,7 +188,7 @@ function App() {
     if (signingClient) {
       setWalletName(walletAddress);
       setSigner(signingClient)
-      toast.success(`Connected to ${wallet_type} wallet`);
+      // toast.success(`Connected to ${wallet_type} wallet`);
     }
   };
 
@@ -225,16 +244,18 @@ function App() {
 
     if (wallet === "keplr") {
       authenticate("keplr");
+      setCurrentNetworkSymbol(1)
     } else if (wallet === "leap") {
       authenticate("leap");
+      setCurrentNetworkSymbol(1)
     } else if (wallet === "ethereum") {
-      await open();
+      if (!isConnected) await open();
+      setCurrentNetworkSymbol(2)
     }
   }
   const [windowAvailable, setWindowAvailable] = useState(false);
 
   useEffect(() => {
-    console.log("checking window availability")
     if (typeof window !== 'undefined') {
       setWindowAvailable(true);
     }
@@ -246,6 +267,31 @@ function App() {
       initConnect(wallet);
     }
   }, [windowAvailable]);
+
+
+
+  const fetchCollections = async (limit, currentUserId) => {
+    try {
+      const response = await getCollectionList(
+        limit,
+        currentUserId,
+        currentNetworkSymbol
+      );
+      const colData = response.data || [];
+      console.log("::::: colData", colData)
+      setCollectionList(colData);
+    } catch (err) {
+      console.log(err);
+      setCollectionList([]);
+    } finally {
+      // setWorking(false);
+
+    }
+  };
+
+  useEffect(() => {
+    if (currentUsr) fetchCollections(10, currentUsr._id);
+  }, [currentUsr]);
 
   return (
     <>
@@ -263,6 +309,10 @@ function App() {
       <MinterCanvas
         walletName={walletName}
         signer={signer}
+        // 
+        currentUsr={currentUsr}
+        collectionList={collectionList}
+        currentNetworkSymbol={currentNetworkSymbol}
       />
       <StepSec />
       <TutSec onClick={scrollToMint} />
