@@ -19,6 +19,8 @@ const NftDetailsModal = ({
   );
   const [tabNumb, setTabNumb] = useState(1);
 
+  // console.log("::::::: collectionList ---",collectionList)
+
   useEffect(() => {
     // Set the initial values when the modal opens
     setNftName(initialName || "");
@@ -158,26 +160,29 @@ const NftDetailsModal = ({
                 </h1>
 
                 <div className="flex flex-wrap justify-center gap-4 mt-4">
-                  {collectionList.map((collection, index) => (
-                    <div
-                      key={index}
-                      className={`flex flex-col items-center gap-2 p-2 cursor-pointer ${
-                        selectedCollectionIndex === index ? "bg-green-200" : ""
-                      }`}
-                      onClick={() => handleSelectedColl(index)}
-                    >
-                      <img
-                        src={collection.image}
-                        alt={collection.name}
-                        className="w-12 h-12 rounded-full"
-                      />
-                      <div className="text-center text-black">
-                        {collection.name.length > 4
-                          ? `${collection.name.slice(0, 4)}...`
-                          : collection.name}
+                  {collectionList.map((collection, index) => {
+                    console.log("::::: collecton",collection)
+                    return (
+                      <div
+                        key={index}
+                        className={`flex flex-col items-center gap-2 p-2 cursor-pointer ${
+                          selectedCollectionIndex === index ? "bg-green-200" : ""
+                        }`}
+                        onClick={() => handleSelectedColl(index)}
+                      >
+                        <img
+                          src={collection.image}
+                          alt={collection.name}
+                          className="w-12 h-12 rounded-full"
+                        />
+                        <div className="text-center text-black">
+                          {collection.name.length > 4
+                            ? `${collection.name.slice(0, 8)}...`
+                            : collection.name}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
 
                 <div className="flex justify-center">

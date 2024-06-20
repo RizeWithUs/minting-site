@@ -100,9 +100,9 @@ function App() {
 
 
 
-  const Login = (params) => {
+  const Login = async (params) => {
 
-    axios({
+    await axios({
       method: "post",
       url: `${config.baseUrl}users/login`,
       data: params,
@@ -271,6 +271,9 @@ function App() {
 
 
   const fetchCollections = async (limit, currentUserId) => {
+    // console.log(
+    //   ".... currentUserId", currentUserId
+    // )
     try {
       const response = await getCollectionList(
         limit,
@@ -278,7 +281,7 @@ function App() {
         currentNetworkSymbol
       );
       const colData = response.data || [];
-      console.log("::::: colData", colData)
+      console.log(":::: colData", colData)
       setCollectionList(colData);
     } catch (err) {
       console.log(err);
@@ -306,14 +309,17 @@ function App() {
         shortenAddress={shortenAddress}
         signer={signer}
       />
-      <MinterCanvas
-        walletName={walletName}
-        signer={signer}
-        // 
-        currentUsr={currentUsr}
-        collectionList={collectionList}
-        currentNetworkSymbol={currentNetworkSymbol}
-      />
+
+      {currentUsr &&
+        <MinterCanvas
+          walletName={walletName}
+          signer={signer}
+          // 
+          currentUsr={currentUsr}
+          collectionList={collectionList}
+          currentNetworkSymbol={currentNetworkSymbol}
+        />
+      }
       <StepSec />
       <TutSec onClick={scrollToMint} />
       <Section2 />
