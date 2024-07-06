@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="stylesheet" href="style.css">
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,12 +23,166 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Rizenfts</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>Rizenfts</title>
+
+  <style type="text/css">
+    @font-face {
+      font-weight: 400;
+      font-style: normal;
+      font-family: circular;
+
+      src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Book.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-weight: 700;
+      font-style: normal;
+      font-family: circular;
+
+      src: url('chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/fonts/CircularXXWeb-Bold.woff2') format('woff2');
+    }
+  </style>
+  <style data-emotion="css b62m3t-container" data-s="">
+    .css-b62m3t-container {
+      position: relative;
+      box-sizing: border-box;
+    }
+  </style>
+  <style data-emotion="css 7pg0cj-a11yText" data-s="">
+    .css-7pg0cj-a11yText {
+      z-index: 9999;
+      border: 0;
+      clip: rect(1px, 1px, 1px, 1px);
+      height: 1px;
+      width: 1px;
+      position: absolute;
+      overflow: hidden;
+      padding: 0;
+      white-space: nowrap;
+    }
+  </style>
+  <style data-emotion="css 13cymwt-control" data-s="">
+    .css-13cymwt-control {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      cursor: default;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      min-height: 38px;
+      outline: 0 !important;
+      position: relative;
+      -webkit-transition: all 100ms;
+      transition: all 100ms;
+      background-color: hsl(0, 0%, 100%);
+      border-color: hsl(0, 0%, 80%);
+      border-radius: 4px;
+      border-style: solid;
+      border-width: 1px;
+      box-sizing: border-box;
+    }
+
+    .css-13cymwt-control:hover {
+      border-color: hsl(0, 0%, 70%);
+    }
+  </style>
+  <style data-emotion="css hlgwow" data-s="">
+    .css-hlgwow {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      display: grid;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      -webkit-box-flex-wrap: wrap;
+      -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      overflow: hidden;
+      padding: 2px 8px;
+      box-sizing: border-box;
+    }
+  </style>
+  <style data-emotion="css 1jqq78o-placeholder" data-s="">
+    .css-1jqq78o-placeholder {
+      grid-area: 1/1/2/3;
+      color: hsl(0, 0%, 50%);
+      margin-left: 2px;
+      margin-right: 2px;
+      box-sizing: border-box;
+    }
+  </style>
+  <style data-emotion="css u5u7qf" data-s="">
+    .css-u5u7qf {
+      visibility: visible;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      display: block;
+      grid-area: 1/1/2/3;
+      grid-template-columns: 0 min-content;
+      margin: 2px;
+      padding-bottom: 2px;
+      padding-top: 10px;
+      color: #33333A;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 8px;
+      font-weight: 500;
+    }
+
+    .css-u5u7qf:after {
+      content: attr(data-value) " ";
+      visibility: hidden;
+      white-space: pre;
+      grid-area: 1/2;
+      font: inherit;
+      min-width: 2px;
+      border: 0;
+      margin: 0;
+      outline: 0;
+      padding: 0;
+    }
+  </style>
+  <style data-emotion="css 1wy0on6" data-s="">
+    .css-1wy0on6 {
+      -webkit-align-items: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+      align-self: stretch;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body className="bg-zinc-900 text-zinc-200">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +192,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

@@ -43,8 +43,8 @@ const NotifyModal = ({
                 <div className="text-black">Progress</div>
               </h1>
               <p className="flex gap-1  justify-center">{notifyMsg}</p>
-              <div class="loading-icon">
-                <div class="icon"></div>
+              <div className="loading-icon">
+                <div className="icon"></div>
               </div>
 
               {hasBtn && (
